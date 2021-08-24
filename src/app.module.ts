@@ -5,6 +5,8 @@ import { ContactsModule } from './contacts/contacts.module';
 import { ConfigModule } from '@nestjs/config';
 import appConfig from './config/app.config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
   imports: [
@@ -24,6 +26,9 @@ import { TypeOrmModule } from '@nestjs/typeorm';
       load: [appConfig],
     }),
     ContactsModule,
+    ServeStaticModule.forRoot({
+      rootPath: join(__dirname, './', 'build'),
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

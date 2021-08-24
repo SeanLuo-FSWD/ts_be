@@ -29,9 +29,6 @@ export class ContactsService {
       { relations: ['messages'] },
     );
 
-    console.log('aaaaaaaaaaaaaaaaaaaaaaaa');
-    console.log(user);
-
     let savedUser;
     if (!user) {
       const newUser = this.userRepository.create({
@@ -48,10 +45,6 @@ export class ContactsService {
       if (message) {
         const newMsg = this.messageRepository.create();
         newMsg.text = message;
-        console.log('bbbbbbbbbbbbbbbbbb');
-        console.log(newMsg);
-
-        // user.messages = [newMsg];
         user.messages.push(newMsg);
         savedUser = this.userRepository.save(user);
       }
