@@ -8,8 +8,9 @@
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
+    "build:prod": "cd ../pm_fe && BUILD_PATH='../prosperitymanifesto/dist/build' npm run build && cd ../prosperitymanifesto && cp Procfile package.json .npmrc dist/ && cp -R .ebextensions dist/ && cd ./dist && zip -r dist.zip .",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
-    "start": "nest start",
+    "start": "node main.js",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
     "start:prod": "node dist/main",

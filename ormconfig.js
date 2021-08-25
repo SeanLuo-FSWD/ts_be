@@ -4,8 +4,8 @@ module.exports = {
   host: 'localhost',
   port: 5432,
   username: 'postgres',
-  password: 'pass123',
-  database: 'postgres',
+  password: 'root',
+  database: 'pm_local',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
   cli: {

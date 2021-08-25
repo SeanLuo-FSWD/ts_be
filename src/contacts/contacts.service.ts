@@ -24,12 +24,14 @@ export class ContactsService {
   async create(CreateContactDto: CreateContactDto) {
     const email = CreateContactDto.email;
     const message = CreateContactDto.message.trim();
+    const hdyh = CreateContactDto.hdyh.trim();
+
     const user = await this.userRepository.findOne(
       { email },
       { relations: ['messages'] },
     );
 
-    let savedUser;
+    let savedUser = 'existing';
     if (!user) {
       const newUser = this.userRepository.create({
         ...CreateContactDto,
@@ -40,14 +42,19 @@ export class ContactsService {
         newMsg.text = message;
         newUser.messages = [newMsg];
       }
-      savedUser = this.userRepository.save(newUser);
-    } else {
+      this.userRepository.save(newUser);
+      savedUser = 'new';
+    } else if (message || hdyh) {
       if (message) {
         const newMsg = this.messageRepository.create();
         newMsg.text = message;
         user.messages.push(newMsg);
-        savedUser = this.userRepository.save(user);
       }
+
+      if (hdyh) {
+        user.hdyh = hdyh;
+      }
+      this.userRepository.save(user);
     }
 
     return savedUser || '';

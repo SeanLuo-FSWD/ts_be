@@ -19,6 +19,9 @@ export class User {
   @Column()
   email: string;
 
+  @Column({ nullable: true })
+  hdyh: string;
+
   @JoinTable()
   @OneToMany((type) => Message, (message) => message.user, {
     cascade: true,
