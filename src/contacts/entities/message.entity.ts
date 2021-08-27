@@ -14,8 +14,6 @@ export class Message {
 
   @Column()
   text: string;
-  // Shouldn't we have a column to tie back to contacts?
-
   @ManyToOne((type) => User, (user) => user.messages)
   user: User[];
 }

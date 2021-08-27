@@ -46,12 +46,31 @@ export class ContactsService {
       savedUser = 'new';
     } else if (message || hdyh) {
       if (message) {
-        const newMsg = this.messageRepository.create();
-        newMsg.text = message;
-        user.messages.push(newMsg);
+        // here we want to add msg only if its new.
+        // const msg_arr = await this.messageRepository.find({
+        //     where: { userId: user.id },
+        // });
+
+        const msg_arr = await this.userRepository
+          .createQueryBuilder('user')
+          .leftJoinAndSelect('user.messages', 'messages')
+          .where('user.id = :userId', { userId: user.id })
+          .andWhere('messages.text LIKE :text', { text: message })
+          .select('messages.text')
+          .execute();
+
+        console.log(msg_arr);
+
+        if (msg_arr.length === 0) {
+          // push only if a new message.
+          const newMsg = this.messageRepository.create();
+          newMsg.text = message;
+          user.messages.push(newMsg);
+        }
       }
 
       if (hdyh) {
+        // here we want to replace this.
         user.hdyh = hdyh;
       }
       this.userRepository.save(user);

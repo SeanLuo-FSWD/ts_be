@@ -10,7 +10,7 @@ import { Message } from './message.entity';
 
 @Entity()
 export class User {
-  @PrimaryGeneratedColumn() // decorate id as PK, and auto increment it.
+  @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
