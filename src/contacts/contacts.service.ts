@@ -22,6 +22,8 @@ export class ContactsService {
   ) {}
 
   async create(CreateContactDto: CreateContactDto) {
+    console.log('ContactsServicecreatecalled');
+
     const email = CreateContactDto.email;
     const message = CreateContactDto.message.trim();
     const hdyh = CreateContactDto.hdyh.trim();
