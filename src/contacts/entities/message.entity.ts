@@ -14,6 +14,7 @@ export class Message {
 
   @Column()
   text: string;
-  @ManyToOne((type) => User, (user) => user.messages)
+
+  @ManyToOne((type) => User, (user) => user.messages, { eager: true })
   user: User[];
 }
