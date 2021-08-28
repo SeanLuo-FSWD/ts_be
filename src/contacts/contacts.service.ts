@@ -24,7 +24,7 @@ export class ContactsService {
   async create(CreateContactDto: CreateContactDto) {
     console.log('ContactsServicecreatecalled');
 
-    const email = CreateContactDto.email;
+    const email = CreateContactDto.email.toLocaleLowerCase();
     const message = CreateContactDto.message.trim();
     const hdyh = CreateContactDto.hdyh.trim();
 
@@ -37,6 +37,7 @@ export class ContactsService {
     if (!user) {
       const newUser = this.userRepository.create({
         ...CreateContactDto,
+        email: email.toLocaleLowerCase(),
       });
 
       if (message) {
