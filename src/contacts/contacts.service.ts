@@ -35,6 +35,8 @@ export class ContactsService {
 
     let savedUser = 'existing';
     if (!user) {
+      console.log('ContactsServicecreatecalled : newUser');
+
       const newUser = this.userRepository.create({
         ...CreateContactDto,
         email: email.toLocaleLowerCase(),
@@ -53,6 +55,8 @@ export class ContactsService {
         // const msg_arr = await this.messageRepository.find({
         //     where: { userId: user.id },
         // });
+
+        console.log('ContactsServicecreatecalled : have message or hdyh');
 
         const msg_arr = await this.userRepository
           .createQueryBuilder('user')

@@ -1,6 +1,7 @@
 import {
   Column,
   Entity,
+  JoinColumn,
   ManyToMany,
   ManyToOne,
   PrimaryGeneratedColumn,
@@ -16,5 +17,6 @@ export class Message {
   text: string;
 
   @ManyToOne((type) => User, (user) => user.messages, { eager: true })
+  @JoinColumn()
   user: User[];
 }
